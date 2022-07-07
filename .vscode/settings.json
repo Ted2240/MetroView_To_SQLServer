@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "list": "cpp",
+        "map": "cpp",
+        "system_error": "cpp"
+    }
+}

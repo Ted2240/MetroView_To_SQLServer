@@ -1,0 +1,170 @@
+
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+    <title>LOG</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css" id="logCss">
+        body {
+            background: #18242b;
+            color: #afc6d1;
+            margin-right: 20px;
+            margin-left: 20px;
+            font-size: 14px;
+            font-family: Arial, sans-serif, sans;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:link {
+            color: #a0b2bb;
+        }
+
+        a:active {
+            color: #f59504;
+        }
+
+        a:visited {
+            color: #adc7d4;
+        }
+
+        a:hover {
+            color: #e49115;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            color: #ebe5e5;
+        }
+
+        .d,
+        .w,
+        .c,
+        .f,
+        .i {
+            padding: 3px;
+            overflow: auto;
+        }
+
+        .d {
+            background-color: #0f1011;
+            color: #a8c1ce;
+        }
+
+        .i {
+            background-color: #294453;
+            color: #a8c1ce;
+        }
+
+        .w {
+            background-color: #7993a0;
+            color: #1b2329;
+        }
+
+        .c {
+            background-color: #ff952b;
+            color: #1d2930;
+        }
+
+        .f {
+            background-color: #fc0808;
+            color: #19242b;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><a href="http://www.supconit.com/">MetroView推送SQLServer</a> 日志文件</h1>
+    <script type="text/JavaScript">
+        function objHide(obj) {
+            obj.style.display="none"
+        }
+        function objShow(obj) {
+            obj.style.display="block"
+        }
+        function selectType() {
+            var sel = document.getElementById("typeSelect");
+            const hideList = new Set(['d', 'i', 'w', 'c', 'f']);
+            if (sel.value === 'a') {
+                hideList.forEach(element => {
+                    var list = document.querySelectorAll('.' + element);
+                    list.forEach(objShow);
+                });
+            } else {
+                var ss = hideList;
+                ss.delete(sel.value);
+                ss.forEach(element => {
+                    var list = document.querySelectorAll('.' + element);
+                    list.forEach(objHide);
+                });
+                var showList = document.querySelectorAll('.' + sel.value);
+                showList.forEach(objShow);
+            }
+        }
+    </script>
+    <select id="typeSelect" onchange="selectType()">
+        <option value='a' selected="selected">All</option>
+        <option value='d'>Debug</option>
+        <option value='i'>Info</option>
+        <option value='w'>Warning</option>
+        <option value='c'>Critical</option>
+        <option value='f'>Fatal</option>
+    </select>
+
+<div class="i">2022-06-15 09:32:49 登录SQLServer成功！</div>
+<div class="w">2022-06-15 09:32:53 Orcle连接失败！</div>
+<div class="w">2022-06-15 09:32:53 "ORA-12638: 身份证明检索失败\nUnable to logon"</div>
+<div class="i">2022-06-15 09:36:27 退出程序！</div>
+<div class="i">2022-06-15 09:58:02 登录SQLServer成功！</div>
+<div class="w">2022-06-15 09:58:03 Orcle连接失败！</div>
+<div class="w">2022-06-15 09:58:03 "ORA-12505: TNS: 监听程序当前无法识别连接描述符中所给出的 SID\nUnable to logon"</div>
+<div class="i">2022-06-15 09:58:32 退出程序！</div>
+<div class="i">2022-06-15 09:58:41 登录SQLServer成功！</div>
+<div class="w">2022-06-15 09:58:43 Orcle连接失败！</div>
+<div class="w">2022-06-15 09:58:43 "ORA-12505: TNS: 监听程序当前无法识别连接描述符中所给出的 SID\nUnable to logon"</div>
+<div class="i">2022-06-15 09:58:45 退出程序！</div>
+<div class="i">2022-06-15 09:59:06 登录SQLServer成功！</div>
+<div class="w">2022-06-15 09:59:07 Orcle连接失败！</div>
+<div class="w">2022-06-15 09:59:07 "ORA-12505: TNS: 监听程序当前无法识别连接描述符中所给出的 SID\nUnable to logon"</div>
+<div class="i">2022-06-15 09:59:49 退出程序！</div>
+<div class="i">2022-06-15 10:08:11 登录SQLServer成功！</div>
+<div class="w">2022-06-15 10:08:12 Orcle连接失败！</div>
+<div class="w">2022-06-15 10:08:12 "ORA-12505: TNS: 监听程序当前无法识别连接描述符中所给出的 SID\nUnable to logon"</div>
+<div class="i">2022-06-15 10:08:18 退出程序！</div>
+<div class="i">2022-06-15 10:12:56 登录SQLServer成功！</div>
+<div class="i">2022-06-15 10:13:34 登录SQLServer成功！</div>
+<div class="i">2022-06-15 10:30:01 登录SQLServer成功！</div>
+<div class="w">2022-06-15 10:30:02 Orcle连接失败！</div>
+<div class="w">2022-06-15 10:30:02 "ORA-12505: TNS: 监听程序当前无法识别连接描述符中所给出的 SID\nUnable to logon"</div>
+<div class="i">2022-06-15 10:30:04 退出程序！</div>
+<div class="i">2022-06-15 10:30:25 登录SQLServer成功！</div>
+<div class="i">2022-06-15 10:33:45 登录SQLServer成功！</div>
+<div class="i">2022-06-15 10:34:46 登录SQLServer成功！</div>
+<div class="w">2022-06-15 10:34:49 Orcle连接失败！</div>
+<div class="w">2022-06-15 10:34:49 "ORA-12541: TNS: 无监听程序\nUnable to logon"</div>
+<div class="i">2022-06-15 10:35:12 退出程序！</div>
+<div class="i">2022-06-15 10:36:02 登录SQLServer成功！</div>
+<div class="w">2022-06-15 10:36:06 Orcle连接失败！</div>
+<div class="w">2022-06-15 10:36:06 "ORA-12541: TNS: 无监听程序\nUnable to logon"</div>
+<div class="i">2022-06-15 10:36:07 退出程序！</div>
+<div class="i">2022-06-15 10:36:24 登录SQLServer成功！</div>
+<div class="i">2022-06-15 15:26:18 登录SQLServer成功！</div>
+<div class="i">2022-06-15 15:38:20 登录SQLServer成功！</div>
+<div class="w">2022-06-15 15:38:24 Orcle连接失败！</div>
+<div class="w">2022-06-15 15:38:24 "ORA-12541: TNS: 无监听程序\nUnable to logon"</div>
+<div class="i">2022-06-15 15:38:26 退出程序！</div>
+<div class="i">2022-06-15 16:05:27 登录SQLServer成功！</div>
+<div class="i">2022-06-15 16:08:29 登录SQLServer成功！</div>
+<div class="i">2022-06-15 16:12:07 登录SQLServer成功！</div>
+<div class="i">2022-06-15 16:12:56 登录SQLServer成功！</div>
+<div class="i">2022-06-15 16:13:06 退出程序！</div>
+<div class="i">2022-06-15 16:14:58 登录SQLServer成功！</div>
+<div class="d">2022-06-15 16:15:00 oracle连接成功</div>
+<div class="i">2022-06-15 16:50:54 退出程序！</div>

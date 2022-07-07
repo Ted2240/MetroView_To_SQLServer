@@ -445,6 +445,97 @@ void HisThread::run()
 {
     uint8_t time_count = 5;
 
+    struct his_aero_s
+    {
+        QString n_code;
+        QString n_time_stamp;
+        QString d_temp;
+        QString d_humidity;
+        QString c_icing;
+        QString n_visibility;
+        QString c_wind_dir;
+        QString d_wind_speed;
+        QString d_rainfall;
+        QString t_rec_time;
+    } his_aero;
+
+    struct his_csls_s
+    {
+        QString n_code;
+        QString n_limit;
+        QString c_status;
+        QString t_rec_time;
+    } his_csls;
+
+    struct his_cms_s
+    {
+        QString n_code;
+        QString t_rec_time;
+        QString content;
+        QString tempCT;
+        QString tempTI;
+    } his_cms;
+
+    struct his_vi_s
+    {
+        QString n_code;
+        QString n_time_stamp;
+        QString n_visibility;
+        QString t_rec_time;
+    } his_vi;
+
+    struct his_et_s
+    {
+        QString n_code;
+        QString c_et_status;
+        QString t_rec_time;
+        QString status;
+    } his_et;
+
+    struct his_ls_s
+    {
+        QString n_code;
+        QString c_ls_status;
+        QString t_rec_time;
+        QString status;
+    } his_ls;
+
+    struct his_vd_s
+    {
+        QString n_code;
+        QString d_up_lane1_occupy;
+        QString d_up_lane1_speed;
+        QString n_up_lane1_quantity;
+        QString d_up_lane2_occupy;
+        QString d_up_lane2_speed;
+        QString n_up_lane2_quantity;
+        QString d_up_lane3_occupy;
+        QString d_up_lane3_speed;
+        QString n_up_lane3_quantity;
+        QString d_up_lane4_occupy;
+        QString d_up_lane4_speed;
+        QString n_up_lane4_quantity;
+        QString d_up_lane5_occupy;
+        QString d_up_lane5_speed;
+        QString n_up_lane5_quantity;
+        QString d_down_lane1_occupy;
+        QString d_down_lane1_speed;
+        QString n_down_lane1_quantity;
+        QString d_down_lane2_occupy;
+        QString d_down_lane2_speed;
+        QString n_down_lane2_quantity;
+        QString d_down_lane3_occupy;
+        QString d_down_lane3_speed;
+        QString n_down_lane3_quantity;
+        QString d_down_lane4_occupy;
+        QString d_down_lane4_speed;
+        QString n_down_lane4_quantity;
+        QString d_down_lane5_occupy;
+        QString d_down_lane5_speed;
+        QString n_down_lane5_quantity;
+        QString t_rec_time;
+    } his_vd;
+
     loadHisSubData();
 
     while (1)
@@ -471,22 +562,22 @@ void HisThread::run()
 
                 {
                     QSqlQuery query(db);
-                    query.exec("SELECT * FROM CUR_AERO");
+                    query.exec("SELECT N_CODE,T_REC_TIME,D_TEMP,D_HUMIDITY,C_ICING,N_VISIBILITY,C_WIND_DIR,D_WIND_SPEED,D_RAINFALL FROM CUR_AERO");
                     while (true == query.next())
                     {
-                        QString n_code = query.value(0).toString();
-                        QString n_time_stamp = query.value(11).toString();
-                        QString d_temp = query.value(2).toString();
-                        QString d_humidity = query.value(3).toString();
-                        QString c_icing = query.value(4).toString();
-                        QString n_visibility = query.value(5).toString();
-                        QString c_wind_dir = query.value(6).toString();
-                        QString d_wind_speed = query.value(7).toString();
-                        QString d_rainfall = query.value(8).toString();
-                        QString t_rec_time = getReqTime();
+                        his_aero.n_code = query.value(0).toString();
+                        his_aero.n_time_stamp = query.value(1).toString();
+                        his_aero.d_temp = query.value(2).toString();
+                        his_aero.d_humidity = query.value(3).toString();
+                        his_aero.c_icing = query.value(4).toString();
+                        his_aero.n_visibility = query.value(5).toString();
+                        his_aero.c_wind_dir = query.value(6).toString();
+                        his_aero.d_wind_speed = query.value(7).toString();
+                        his_aero.d_rainfall = query.value(8).toString();
+                        his_aero.t_rec_time = getReqTime();
 
                         sqltemp = "INSERT INTO HIST_AERO (n_code,n_time_stamp,d_temp,d_humidity,c_icing,n_visibility,c_wind_dir,d_wind_speed,d_rainfall,t_rec_time,c_send_flag,c_stat_falg) VALUES ('" +
-                                  n_code + "','" + n_time_stamp + "','" + d_temp + "','" + d_humidity + "','" + c_icing + "','" + n_visibility + "','" + c_wind_dir + "','" + d_wind_speed + "','" + d_rainfall + "','" + t_rec_time + "','" + "0" + "','" + "0" + "')";
+                                  his_aero.n_code + "','" + his_aero.n_time_stamp + "','" + his_aero.d_temp + "','" + his_aero.d_humidity + "','" + his_aero.c_icing + "','" + his_aero.n_visibility + "','" + his_aero.c_wind_dir + "','" + his_aero.d_wind_speed + "','" + his_aero.d_rainfall + "','" + his_aero.t_rec_time + "','" + "0" + "','" + "0" + "')";
 
                         if (level_log > 2)
                         {
@@ -506,25 +597,25 @@ void HisThread::run()
 
                 {
                     QSqlQuery query(db);
-                    query.exec("SELECT * FROM CUR_CSLS");
+                    query.exec("SELECT N_CODE,N_LIMIT,C_STATUS FROM CUR_CSLS");
                     while (true == query.next())
                     {
-                        QString n_code = query.value(0).toString();
-                        QString n_limit = query.value(2).toString();
-                        QString c_status = query.value(3).toString();
-                        QString t_rec_time = getReqTime();
+                        his_csls.n_code = query.value(0).toString();
+                        his_csls.n_limit = query.value(1).toString();
+                        his_csls.c_status = query.value(2).toString();
+                        his_csls.t_rec_time = getReqTime();
 
-                        map<QString, QString>::iterator iter = map_csls.find(n_code);
+                        map<QString, QString>::iterator iter = map_csls.find(his_csls.n_code);
                         if (iter == map_csls.end())
                         {
-                            map_csls.insert(pair<QString, QString>(n_code, NULL));
-                            iter = map_csls.find(n_code);
+                            map_csls.insert(pair<QString, QString>(his_csls.n_code, NULL));
+                            iter = map_csls.find(his_csls.n_code);
                         }
-                        if (iter->second.compare(n_limit))
+                        if (iter->second.compare(his_csls.n_limit))
                         {
-                            iter->second = n_limit;
+                            iter->second = his_csls.n_limit;
                             sqltemp = "INSERT INTO HIST_CSLS (n_code,n_limit,c_status,t_rec_time,c_send_flag) VALUES ('" +
-                                      n_code + "','" + n_limit + "','" + c_status + "','" + t_rec_time + "','" + "0" + "')";
+                                      his_csls.n_code + "','" + his_csls.n_limit + "','" + his_csls.c_status + "','" + his_csls.t_rec_time + "','" + "0" + "')";
 
                             if (level_log > 2)
                             {
@@ -546,81 +637,81 @@ void HisThread::run()
                 {
 
                     QSqlQuery query(db);
-                    query.exec("SELECT * FROM CUR_CMS");
+                    query.exec("SELECT N_CODE,N_SEQUENCE,VC_ORIG_CONTENT,N_DISP_TIME FROM CUR_CMS");
                     while (true == query.next())
                     {
-                        QString n_code = query.value(0).toString();
-                        map<QString, cms>::iterator iter = map_cms.find(n_code);
+                        his_cms.n_code = query.value(0).toString();
+                        map<QString, cms>::iterator iter = map_cms.find(his_cms.n_code);
 
                         if (iter == map_cms.end())
                         {
                             cms empty_cms;
-                            map_cms.insert(pair<QString, cms>(n_code, empty_cms));
-                            iter = map_cms.find(n_code);
+                            map_cms.insert(pair<QString, cms>(his_cms.n_code, empty_cms));
+                            iter = map_cms.find(his_cms.n_code);
                         }
 
-                        QString tempCT = query.value(3).toString();
-                        QString tempTI = QString::number(query.value(4).toInt());
+                        his_cms.tempCT = query.value(2).toString();
+                        his_cms.tempTI = QString::number(query.value(3).toInt());
 
-                        switch (query.value(2).toInt())
+                        switch (query.value(1).toInt())
                         {
                         case 1:
-                            if (iter->second.sequeue1_CT.compare(tempCT))
+                            if (iter->second.sequeue1_CT.compare(his_cms.tempCT))
                             {
-                                iter->second.sequeue1_CT = tempCT;
+                                iter->second.sequeue1_CT = his_cms.tempCT;
                                 iter->second.send_flag = 1;
                             }
-                            if (iter->second.sequeue1_TI.compare(tempTI))
+                            if (iter->second.sequeue1_TI.compare(his_cms.tempTI))
                             {
-                                iter->second.sequeue1_TI = tempTI;
+                                iter->second.sequeue1_TI = his_cms.tempTI;
                                 iter->second.send_flag = 1;
                             }
                             break;
                         case 2:
-                            if (iter->second.sequeue2_CT.compare(tempCT))
+                            if (iter->second.sequeue2_CT.compare(his_cms.tempCT))
                             {
-                                iter->second.sequeue2_CT = tempCT;
+                                iter->second.sequeue2_CT = his_cms.tempCT;
                                 iter->second.send_flag = 1;
                             }
-                            if (iter->second.sequeue2_TI.compare(tempTI))
+                            if (iter->second.sequeue2_TI.compare(his_cms.tempTI))
                             {
-                                iter->second.sequeue2_TI = tempTI;
+                                iter->second.sequeue2_TI = his_cms.tempTI;
                                 iter->second.send_flag = 1;
                             }
                             break;
                         case 3:
-                            if (iter->second.sequeue3_CT.compare(tempCT))
+                            if (iter->second.sequeue3_CT.compare(his_cms.tempCT))
                             {
-                                iter->second.sequeue3_CT = tempCT;
+                                iter->second.sequeue3_CT = his_cms.tempCT;
                                 iter->second.send_flag = 1;
                             }
-                            if (iter->second.sequeue3_TI.compare(tempTI))
+                            if (iter->second.sequeue3_TI.compare(his_cms.tempTI))
                             {
-                                iter->second.sequeue3_TI = tempTI;
+                                iter->second.sequeue3_TI = his_cms.tempTI;
                                 iter->second.send_flag = 1;
                             }
                             break;
                         case 4:
-                            if (iter->second.sequeue4_CT.compare(tempCT))
+                            if (iter->second.sequeue4_CT.compare(his_cms.tempCT))
                             {
-                                iter->second.sequeue4_CT = tempCT;
+                                iter->second.sequeue4_CT = his_cms.tempCT;
                                 iter->second.send_flag = 1;
                             }
-                            if (iter->second.sequeue4_TI.compare(tempTI))
+                            if (iter->second.sequeue4_TI.compare(his_cms.tempTI))
                             {
-                                iter->second.sequeue4_TI = tempTI;
+                                iter->second.sequeue4_TI = his_cms.tempTI;
                                 iter->second.send_flag = 1;
                             }
                             break;
                         case 5:
-                            if (iter->second.sequeue5_CT.compare(tempCT))
+                            if (iter->second.sequeue5_CT.compare(his_cms.tempCT))
                             {
-                                iter->second.sequeue5_CT = tempCT;
+                                iter->second.sequeue5_CT = his_cms.tempCT;
                                 iter->second.send_flag = 1;
                             }
-                            if (iter->second.sequeue5_TI.compare(tempTI))
+                            if (iter->second.sequeue5_TI.compare(his_cms.tempTI))
                             {
-                                iter->second.sequeue5_TI = tempTI;
+                                iter->second.sequeue5_TI = his_cms.tempTI;
                                 iter->second.send_flag = 1;
                             }
                             break;
@@ -633,11 +724,11 @@ void HisThread::run()
                     {
                         if (iter->second.send_flag)
                         {
-                            QString n_code = iter->first;
-                            QString t_rec_time = getReqTime();
-                            QString content = iter->second.sequeue1_CT + "/" + iter->second.sequeue1_TI + "|" + iter->second.sequeue2_CT + "/" + iter->second.sequeue2_TI + "|" + iter->second.sequeue3_CT + "/" + iter->second.sequeue3_TI + "|" + iter->second.sequeue4_CT + "/" + iter->second.sequeue4_TI + "|" + iter->second.sequeue5_CT + "/" + iter->second.sequeue5_TI;
+                            his_cms.n_code = iter->first;
+                            his_cms.t_rec_time = getReqTime();
+                            his_cms.content = iter->second.sequeue1_CT + "/" + iter->second.sequeue1_TI + "|" + iter->second.sequeue2_CT + "/" + iter->second.sequeue2_TI + "|" + iter->second.sequeue3_CT + "/" + iter->second.sequeue3_TI + "|" + iter->second.sequeue4_CT + "/" + iter->second.sequeue4_TI + "|" + iter->second.sequeue5_CT + "/" + iter->second.sequeue5_TI;
                             sqltemp = "INSERT INTO HIST_CMS (n_code,vc_orig_content,vc_content,c_status,t_rec_time,c_send_flag) VALUES ('" +
-                                      n_code + "','" + content + "','" + content + "','" + "0" + "','" + t_rec_time + "','" + "0" + "')";
+                                      his_cms.n_code + "','" + his_cms.content + "','" + his_cms.content + "','" + "0" + "','" + his_cms.t_rec_time + "','" + "0" + "')";
                             if (level_log > 2)
                             {
                                 qDebug() << "[SQL Server查询语句]"
@@ -658,16 +749,16 @@ void HisThread::run()
 
                 {
                     QSqlQuery query(db);
-                    query.exec("SELECT * FROM CUR_VI");
+                    query.exec("SELECT N_CODE,T_REC_TIME,N_VISIBILITY FROM CUR_VI");
                     while (true == query.next())
                     {
-                        QString n_code = query.value(0).toString();
-                        QString n_time_stamp = query.value(5).toString();
-                        QString n_visibility = query.value(2).toString();
-                        QString t_rec_time = getReqTime();
+                        his_vi.n_code = query.value(0).toString();
+                        his_vi.n_time_stamp = query.value(1).toString();
+                        his_vi.n_visibility = query.value(2).toString();
+                        his_vi.t_rec_time = getReqTime();
 
                         sqltemp = "INSERT INTO HIST_VI (n_code,n_time_stamp,n_visibility,t_rec_time,c_send_flag,c_stat_falg) VALUES ('" +
-                                  n_code + "','" + n_time_stamp + "','" + n_visibility + "','" + t_rec_time + "','" + "0" + "','" + "0" + "')";
+                                  his_vi.n_code + "','" + his_vi.n_time_stamp + "','" + his_vi.n_visibility + "','" + his_vi.t_rec_time + "','" + "0" + "','" + "0" + "')";
 
                         if (level_log > 2)
                         {
@@ -687,29 +778,29 @@ void HisThread::run()
 
                 {
                     QSqlQuery query(db);
-                    query.exec("SELECT * FROM CUR_ET");
+                    query.exec("SELECT N_CODE,C_ET_STATUS FROM CUR_ET");
                     while (true == query.next())
                     {
-                        QString n_code = query.value(0).toString();
-                        QString c_et_status = query.value(2).toString();
-                        QString t_rec_time = getReqTime();
-                        QString status = "0";
-                        if (!c_et_status.compare(QString::fromLocal8Bit("1")))
+                        his_et.n_code = query.value(0).toString();
+                        his_et.c_et_status = query.value(2).toString();
+                        his_et.t_rec_time = getReqTime();
+                        his_et.status = "0";
+                        if (!his_et.c_et_status.compare(QString::fromLocal8Bit("1")))
                         {
-                            status = c_et_status;
+                            his_et.status = his_et.c_et_status;
                         }
-                        map<QString, QString>::iterator iter = map_et.find(n_code);
+                        map<QString, QString>::iterator iter = map_et.find(his_et.n_code);
                         if (iter == map_et.end())
                         {
-                            map_et.insert(pair<QString, QString>(n_code, NULL));
-                            iter = map_et.find(n_code);
+                            map_et.insert(pair<QString, QString>(his_et.n_code, NULL));
+                            iter = map_et.find(his_et.n_code);
                         }
-                        if (iter->second.compare(c_et_status))
+                        if (iter->second.compare(his_et.c_et_status))
                         {
-                            iter->second = c_et_status;
+                            iter->second = his_et.c_et_status;
 
                             sqltemp = "INSERT INTO HIST_ET (n_code,c_et_status,c_status,t_rec_time,c_send_flag) VALUES ('" +
-                                      n_code + "','" + c_et_status + "','" + status + "','" + t_rec_time + "','" + "0" + "')";
+                                      his_et.n_code + "','" + his_et.c_et_status + "','" + his_et.status + "','" + his_et.t_rec_time + "','" + "0" + "')";
 
                             if (level_log > 2)
                             {
@@ -730,26 +821,26 @@ void HisThread::run()
 
                 {
                     QSqlQuery query(db);
-                    query.exec("SELECT * FROM CUR_LS");
+                    query.exec("SELECT N_CODE,C_LS_STATUS FROM CUR_LS");
                     while (true == query.next())
                     {
-                        QString n_code = query.value(0).toString();
-                        QString c_ls_status = query.value(2).toString();
-                        QString t_rec_time = getReqTime();
-                        QString status = "0";
+                        his_ls.n_code = query.value(0).toString();
+                        his_ls.c_ls_status = query.value(1).toString();
+                        his_ls.t_rec_time = getReqTime();
+                        his_ls.status = "0";
 
-                        map<QString, QString>::iterator iter = map_et.find(n_code);
+                        map<QString, QString>::iterator iter = map_et.find(his_ls.n_code);
                         if (iter == map_et.end())
                         {
-                            map_et.insert(pair<QString, QString>(n_code, NULL));
-                            iter = map_et.find(n_code);
+                            map_et.insert(pair<QString, QString>(his_ls.n_code, NULL));
+                            iter = map_et.find(his_ls.n_code);
                         }
-                        if (iter->second.compare(c_ls_status))
+                        if (iter->second.compare(his_ls.c_ls_status))
                         {
-                            iter->second = c_ls_status;
+                            iter->second = his_ls.c_ls_status;
 
                             sqltemp = "INSERT INTO HIST_LS (n_code,c_ls_status,c_status,t_rec_time,c_send_flag) VALUES ('" +
-                                      n_code + "','" + c_ls_status + "','" + status + "','" + t_rec_time + "','" + "0" + "')";
+                                      his_ls.n_code + "','" + his_ls.c_ls_status + "','" + his_ls.status + "','" + his_ls.t_rec_time + "','" + "0" + "')";
 
                             if (level_log > 2)
                             {
@@ -773,41 +864,41 @@ void HisThread::run()
                 {
                     {
                         QSqlQuery query(db);
-                        query.exec("SELECT * FROM CUR_VD");
+                        query.exec("SELECT N_CODE,T_REC_TIME,D_UP_LANE1_OCCUPY,D_UP_LANE1_SPEED,N_UP_LANE1_QUANTITY,D_UP_LANE2_OCCUPY,D_UP_LANE2_SPEED,N_UP_LANE2_QUANTITY,D_UP_LANE3_OCCUPY,D_UP_LANE3_SPEED,N_UP_LANE3_QUANTITY,D_UP_LANE4_OCCUPY,D_UP_LANE4_SPEED,N_UP_LANE4_QUANTITY,D_UP_LANE5_OCCUPY,D_UP_LANE5_SPEED,N_UP_LANE5_QUANTITY,D_DOWN_LANE1_OCCUPY,D_DOWN_LANE1_SPEED,N_DOWN_LANE1_QUANTITY,D_DOWN_LANE2_OCCUPY,D_DOWN_LANE2_SPEED,N_DOWN_LANE2_QUANTITY,D_DOWN_LANE3_OCCUPY,D_DOWN_LANE3_SPEED,N_DOWN_LANE3_QUANTITY,D_DOWN_LANE4_OCCUPY,D_DOWN_LANE4_SPEED,N_DOWN_LANE4_QUANTITY,D_DOWN_LANE5_OCCUPY,D_DOWN_LANE5_SPEED,N_DOWN_LANE5_QUANTITY FROM CUR_VD");
                         while (true == query.next())
                         {
-                            QString n_code = query.value(0).toString();
-                            QString d_up_lane1_occupy = query.value(2).toString();
-                            QString d_up_lane1_speed = query.value(3).toString();
-                            QString n_up_lane1_quantity = query.value(4).toString();
-                            QString d_up_lane2_occupy = query.value(5).toString();
-                            QString d_up_lane2_speed = query.value(6).toString();
-                            QString n_up_lane2_quantity = query.value(7).toString();
-                            QString d_up_lane3_occupy = query.value(8).toString();
-                            QString d_up_lane3_speed = query.value(9).toString();
-                            QString n_up_lane3_quantity = query.value(10).toString();
-                            QString d_up_lane4_occupy = query.value(11).toString();
-                            QString d_up_lane4_speed = query.value(12).toString();
-                            QString n_up_lane4_quantity = query.value(13).toString();
-                            QString d_up_lane5_occupy = query.value(14).toString();
-                            QString d_up_lane5_speed = query.value(15).toString();
-                            QString n_up_lane5_quantity = query.value(16).toString();
-                            QString d_down_lane1_occupy = query.value(17).toString();
-                            QString d_down_lane1_speed = query.value(18).toString();
-                            QString n_down_lane1_quantity = query.value(19).toString();
-                            QString d_down_lane2_occupy = query.value(20).toString();
-                            QString d_down_lane2_speed = query.value(21).toString();
-                            QString n_down_lane2_quantity = query.value(22).toString();
-                            QString d_down_lane3_occupy = query.value(23).toString();
-                            QString d_down_lane3_speed = query.value(24).toString();
-                            QString n_down_lane3_quantity = query.value(25).toString();
-                            QString d_down_lane4_occupy = query.value(26).toString();
-                            QString d_down_lane4_speed = query.value(27).toString();
-                            QString n_down_lane4_quantity = query.value(28).toString();
-                            QString d_down_lane5_occupy = query.value(29).toString();
-                            QString d_down_lane5_speed = query.value(30).toString();
-                            QString n_down_lane5_quantity = query.value(31).toString();
-                            QString t_rec_time = query.value(34).toString();
+                            his_vd.n_code = query.value(0).toString();
+                            his_vd.d_up_lane1_occupy = query.value(2).toString();
+                            his_vd.d_up_lane1_speed = query.value(3).toString();
+                            his_vd.n_up_lane1_quantity = query.value(4).toString();
+                            his_vd.d_up_lane2_occupy = query.value(5).toString();
+                            his_vd.d_up_lane2_speed = query.value(6).toString();
+                            his_vd.n_up_lane2_quantity = query.value(7).toString();
+                            his_vd.d_up_lane3_occupy = query.value(8).toString();
+                            his_vd.d_up_lane3_speed = query.value(9).toString();
+                            his_vd.n_up_lane3_quantity = query.value(10).toString();
+                            his_vd.d_up_lane4_occupy = query.value(11).toString();
+                            his_vd.d_up_lane4_speed = query.value(12).toString();
+                            his_vd.n_up_lane4_quantity = query.value(13).toString();
+                            his_vd.d_up_lane5_occupy = query.value(14).toString();
+                            his_vd.d_up_lane5_speed = query.value(15).toString();
+                            his_vd.n_up_lane5_quantity = query.value(16).toString();
+                            his_vd.d_down_lane1_occupy = query.value(17).toString();
+                            his_vd.d_down_lane1_speed = query.value(18).toString();
+                            his_vd.n_down_lane1_quantity = query.value(19).toString();
+                            his_vd.d_down_lane2_occupy = query.value(20).toString();
+                            his_vd.d_down_lane2_speed = query.value(21).toString();
+                            his_vd.n_down_lane2_quantity = query.value(22).toString();
+                            his_vd.d_down_lane3_occupy = query.value(23).toString();
+                            his_vd.d_down_lane3_speed = query.value(24).toString();
+                            his_vd.n_down_lane3_quantity = query.value(25).toString();
+                            his_vd.d_down_lane4_occupy = query.value(26).toString();
+                            his_vd.d_down_lane4_speed = query.value(27).toString();
+                            his_vd.n_down_lane4_quantity = query.value(28).toString();
+                            his_vd.d_down_lane5_occupy = query.value(29).toString();
+                            his_vd.d_down_lane5_speed = query.value(30).toString();
+                            his_vd.n_down_lane5_quantity = query.value(31).toString();
+                            his_vd.t_rec_time = query.value(1).toString();
 
                             sqltemp = "INSERT INTO HIST_VD (n_code,n_time_stamp,d_up_lane1_occupy,d_up_lane1_speed,n_up_lane1_quantity,"
                                       "d_up_lane2_occupy,d_up_lane2_speed,n_up_lane2_quantity,"
@@ -819,7 +910,7 @@ void HisThread::run()
                                       "d_down_lane3_occupy,d_down_lane3_speed,n_down_lane3_quantity,"
                                       "d_down_lane4_occupy,d_down_lane4_speed,n_down_lane4_quantity,"
                                       "d_down_lane5_occupy,d_down_lane5_speed,n_down_lane5_quantity,t_rec_time,c_send_flag,c_stat_falg) VALUES ('" +
-                                      n_code + "','" + t_rec_time + "','" + d_up_lane1_occupy + "','" + d_up_lane1_speed + "','" + n_up_lane1_quantity + "','" + d_up_lane2_occupy + "','" + d_up_lane2_speed + "','" + n_up_lane2_quantity + "','" + d_up_lane3_occupy + "','" + d_up_lane3_speed + "','" + n_up_lane3_quantity + "','" + d_up_lane4_occupy + "','" + d_up_lane4_speed + "','" + n_up_lane4_quantity + "','" + d_up_lane5_occupy + "','" + d_up_lane5_speed + "','" + n_up_lane5_quantity + "','" + d_down_lane1_occupy + "','" + d_down_lane1_speed + "','" + n_down_lane1_quantity + "','" + d_down_lane2_occupy + "','" + d_down_lane2_speed + "','" + n_down_lane2_quantity + "','" + d_down_lane3_occupy + "','" + d_down_lane3_speed + "','" + n_down_lane3_quantity + "','" + d_down_lane4_occupy + "','" + d_down_lane4_speed + "','" + n_down_lane4_quantity + "','" + d_down_lane5_occupy + "','" + d_down_lane5_speed + "','" + n_down_lane5_quantity + "','" + getReqTime() + "','" + "0" + "','" + "0" + "')";
+                                      his_vd.n_code + "','" + his_vd.t_rec_time + "','" + his_vd.d_up_lane1_occupy + "','" + his_vd.d_up_lane1_speed + "','" + his_vd.n_up_lane1_quantity + "','" + his_vd.d_up_lane2_occupy + "','" + his_vd.d_up_lane2_speed + "','" + his_vd.n_up_lane2_quantity + "','" + his_vd.d_up_lane3_occupy + "','" + his_vd.d_up_lane3_speed + "','" + his_vd.n_up_lane3_quantity + "','" + his_vd.d_up_lane4_occupy + "','" + his_vd.d_up_lane4_speed + "','" + his_vd.n_up_lane4_quantity + "','" + his_vd.d_up_lane5_occupy + "','" + his_vd.d_up_lane5_speed + "','" + his_vd.n_up_lane5_quantity + "','" + his_vd.d_down_lane1_occupy + "','" + his_vd.d_down_lane1_speed + "','" + his_vd.n_down_lane1_quantity + "','" + his_vd.d_down_lane2_occupy + "','" + his_vd.d_down_lane2_speed + "','" + his_vd.n_down_lane2_quantity + "','" + his_vd.d_down_lane3_occupy + "','" + his_vd.d_down_lane3_speed + "','" + his_vd.n_down_lane3_quantity + "','" + his_vd.d_down_lane4_occupy + "','" + his_vd.d_down_lane4_speed + "','" + his_vd.n_down_lane4_quantity + "','" + his_vd.d_down_lane5_occupy + "','" + his_vd.d_down_lane5_speed + "','" + his_vd.n_down_lane5_quantity + "','" + getReqTime() + "','" + "0" + "','" + "0" + "')";
                             if (level_log > 2)
                             {
                                 qDebug() << "[SQL Server查询语句]"
@@ -928,33 +1019,32 @@ void loadHisSubData()
                 cms tempcms;
                 QJsonObject obj = iteratorJson->toObject();
 
-                tempcms.send_flag =obj.value("send_flag").toBool();
-                tempcms.sequeue1_CT =obj.value("sequeue1_CT").toString();
-                tempcms.sequeue1_TI =obj.value("sequeue1_TI").toString();
-                tempcms.sequeue2_CT =obj.value("sequeue2_CT").toString();
-                tempcms.sequeue2_TI =obj.value("sequeue2_TI").toString();
-                tempcms.sequeue3_CT =obj.value("sequeue3_CT").toString();
-                tempcms.sequeue3_TI =obj.value("sequeue3_TI").toString();
-                tempcms.sequeue4_CT =obj.value("sequeue4_CT").toString();
-                tempcms.sequeue4_TI =obj.value("sequeue4_TI").toString();
-                tempcms.sequeue5_CT =obj.value("sequeue5_CT").toString();
-                tempcms.sequeue5_TI =obj.value("sequeue5_TI").toString();
+                tempcms.send_flag = obj.value("send_flag").toBool();
+                tempcms.sequeue1_CT = obj.value("sequeue1_CT").toString();
+                tempcms.sequeue1_TI = obj.value("sequeue1_TI").toString();
+                tempcms.sequeue2_CT = obj.value("sequeue2_CT").toString();
+                tempcms.sequeue2_TI = obj.value("sequeue2_TI").toString();
+                tempcms.sequeue3_CT = obj.value("sequeue3_CT").toString();
+                tempcms.sequeue3_TI = obj.value("sequeue3_TI").toString();
+                tempcms.sequeue4_CT = obj.value("sequeue4_CT").toString();
+                tempcms.sequeue4_TI = obj.value("sequeue4_TI").toString();
+                tempcms.sequeue5_CT = obj.value("sequeue5_CT").toString();
+                tempcms.sequeue5_TI = obj.value("sequeue5_TI").toString();
 
-                map_cms.insert(pair<QString,cms>(iteratorJson.key(),tempcms));
-
+                map_cms.insert(pair<QString, cms>(iteratorJson.key(), tempcms));
             }
 
             for (QJsonObject::Iterator iteratorJson = objET.begin(); iteratorJson != objET.end(); iteratorJson++)
             {
-                map_et.insert(pair<QString,QString>(iteratorJson.key(),iteratorJson->toString()));
+                map_et.insert(pair<QString, QString>(iteratorJson.key(), iteratorJson->toString()));
             }
             for (QJsonObject::Iterator iteratorJson = objLS.begin(); iteratorJson != objLS.end(); iteratorJson++)
             {
-                map_ls.insert(pair<QString,QString>(iteratorJson.key(),iteratorJson->toString()));
+                map_ls.insert(pair<QString, QString>(iteratorJson.key(), iteratorJson->toString()));
             }
             for (QJsonObject::Iterator iteratorJson = objCSLS.begin(); iteratorJson != objCSLS.end(); iteratorJson++)
             {
-                map_csls.insert(pair<QString,QString>(iteratorJson.key(),iteratorJson->toString()));
+                map_csls.insert(pair<QString, QString>(iteratorJson.key(), iteratorJson->toString()));
             }
 
             qInfo() << "加载历史数据缓存文件成功！";
@@ -1050,6 +1140,7 @@ void MainWindow::on_actionabout_triggered()
 
 void MainWindow::on_actionorcle_triggered()
 {
+
     //    QLibrary *hello_lib = NULL;
     //        //写清楚库的路径，如果放在当前工程的目录下，路径为./Oracle.so
     //        //hello_lib = new QLibrary("D:\\Download\\WINDOWS.X64_193000_db_home\\bin\\oci.dll");
@@ -1065,26 +1156,29 @@ void MainWindow::on_actionorcle_triggered()
 
     // qDebug()<<QSqlDatabase::drivers()<<QApplication::libraryPaths();
 
-//    QSqlDatabase dbOrcle = QSqlDatabase::addDatabase("QOCI", "Orcle");
+    /*    QSqlDatabase dbOrcle = QSqlDatabase::addDatabase("QOCI", "Orcle");
 
-//    dbOrcle.setDatabaseName("orcldatabase");
-//    //    dbOrcle.setHostName(tr("172.20.31.223"));
-//    dbOrcle.setPort(1521);
-//    //    dbOrcle.setUserName(tr("hiway_test"));
-//    //    dbOrcle.setPassword(tr("hiway_test"));
-//    dbOrcle.setHostName(tr("localhost"));
-//    dbOrcle.setUserName(tr("system"));
-//    dbOrcle.setPassword(tr("hiway_test"));
-//    if (!dbOrcle.open())
-//    {
-//        if (level_log > 1)
-//        {
-//            qWarning() << "Orcle连接失败！";
-//            qWarning() << dbOrcle.lastError().text();
-//        }
-//    }
-//    else
-//    {
-//        qDebug() << "oracle连接成功";
-//    }
+//Driver={Microsoft ODBC for Oracle};CONNECTSTRING=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=172.20.31.223)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)));Uid=hiway_test;Pwd=hiway_test;
+
+        //dbOrcle.setDatabaseName("orcldatabase");
+        dbOrcle.setDatabaseName("orcl");
+        dbOrcle.setHostName(tr("172.20.31.223"));
+        dbOrcle.setPort(1521);
+        dbOrcle.setUserName(tr("zhgs"));
+        dbOrcle.setPassword(tr("zhgs"));
+        //    dbOrcle.setHostName(tr("localhost"));
+        //    dbOrcle.setUserName(tr("system"));
+        //    dbOrcle.setPassword(tr("hiway_test"));
+        if (!dbOrcle.open())
+        {
+            if (level_log > 1)
+            {
+                qWarning() << "Orcle连接失败！";
+                qWarning() << dbOrcle.lastError().text();
+            }
+        }
+        else
+        {
+            qDebug() << "oracle连接成功";
+        }*/
 }

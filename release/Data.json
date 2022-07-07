@@ -1,0 +1,38 @@
+{
+    "1": {
+        "device_name": "COVI",
+        "path": "192.168.88.88",
+        "point_name": "VI",
+        "sql_list": "n_visibility",
+        "sql_num_start": "4001",
+        "sql_query": "",
+        "sql_table": "cur_vi"
+    },
+    "2": {
+        "device_name": "MCMS",
+        "path": "192.168.88.88",
+        "point_name": "ZCT1",
+        "sql_list": "vc_orig_content",
+        "sql_num_start": "1609",
+        "sql_query": "n_sequence = '1'",
+        "sql_table": "cur_cms"
+    },
+    "3": {
+        "device_name": "FCMS",
+        "path": "192.168.88.88",
+        "point_name": "ZCT1",
+        "sql_list": "vc_orig_content",
+        "sql_num_start": "1601",
+        "sql_query": "n_sequence = '1'",
+        "sql_table": "cur_cms"
+    },
+	    "4": {
+        "device_name": "FCMS",
+        "path": "192.168.88.88",
+        "point_name": "ZCT2",
+        "sql_list": "vc_orig_content",
+        "sql_num_start": "1601",
+        "sql_query": "n_sequence = '2'",
+        "sql_table": "cur_cms"
+    }
+}

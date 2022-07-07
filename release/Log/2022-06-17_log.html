@@ -1,0 +1,238 @@
+
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+    <title>LOG</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css" id="logCss">
+        body {
+            background: #18242b;
+            color: #afc6d1;
+            margin-right: 20px;
+            margin-left: 20px;
+            font-size: 14px;
+            font-family: Arial, sans-serif, sans;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:link {
+            color: #a0b2bb;
+        }
+
+        a:active {
+            color: #f59504;
+        }
+
+        a:visited {
+            color: #adc7d4;
+        }
+
+        a:hover {
+            color: #e49115;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            color: #ebe5e5;
+        }
+
+        .d,
+        .w,
+        .c,
+        .f,
+        .i {
+            padding: 3px;
+            overflow: auto;
+        }
+
+        .d {
+            background-color: #0f1011;
+            color: #a8c1ce;
+        }
+
+        .i {
+            background-color: #294453;
+            color: #a8c1ce;
+        }
+
+        .w {
+            background-color: #7993a0;
+            color: #1b2329;
+        }
+
+        .c {
+            background-color: #ff952b;
+            color: #1d2930;
+        }
+
+        .f {
+            background-color: #fc0808;
+            color: #19242b;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><a href="http://www.supconit.com/">MetroView推送SQLServer</a> 日志文件</h1>
+    <script type="text/JavaScript">
+        function objHide(obj) {
+            obj.style.display="none"
+        }
+        function objShow(obj) {
+            obj.style.display="block"
+        }
+        function selectType() {
+            var sel = document.getElementById("typeSelect");
+            const hideList = new Set(['d', 'i', 'w', 'c', 'f']);
+            if (sel.value === 'a') {
+                hideList.forEach(element => {
+                    var list = document.querySelectorAll('.' + element);
+                    list.forEach(objShow);
+                });
+            } else {
+                var ss = hideList;
+                ss.delete(sel.value);
+                ss.forEach(element => {
+                    var list = document.querySelectorAll('.' + element);
+                    list.forEach(objHide);
+                });
+                var showList = document.querySelectorAll('.' + sel.value);
+                showList.forEach(objShow);
+            }
+        }
+    </script>
+    <select id="typeSelect" onchange="selectType()">
+        <option value='a' selected="selected">All</option>
+        <option value='d'>Debug</option>
+        <option value='i'>Info</option>
+        <option value='w'>Warning</option>
+        <option value='c'>Critical</option>
+        <option value='f'>Fatal</option>
+    </select>
+
+<div class="i">2022-06-17 15:37:07 登录SQLServer成功！</div>
+<div class="i">2022-06-17 15:37:09 [加载设备点位成功]      "COVI.VI"</div>
+<div class="i">2022-06-17 15:37:09 [加载设备点位成功]      "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:37:09 [加载设备点位成功]      "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:37:09 [加载设备点位成功]      "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 15:37:09 加载配置文件成功！</div>
+<div class="i">2022-06-17 15:37:09 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 15:37:09 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:37:09 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:37:09 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 15:37:29 日志等级更改为 3</div>
+<div class="i">2022-06-17 15:37:36 日志等级更改为 2</div>
+<div class="i">2022-06-17 15:37:39 [历史库上传任务成功]     HIST_AERO</div>
+<div class="i">2022-06-17 15:37:39 [历史库上传任务成功]     HIST_CSLS</div>
+<div class="i">2022-06-17 15:37:40 [历史库上传任务成功]     HIST_CMS</div>
+<div class="i">2022-06-17 15:37:40 [历史库上传任务成功]     HIST_VI</div>
+<div class="i">2022-06-17 15:37:41 [历史库上传任务成功]     HIST_ET</div>
+<div class="i">2022-06-17 15:37:41 [历史库上传任务成功]     HIST_LS</div>
+<div class="i">2022-06-17 15:37:41 [历史库上传任务成功]     HIST_VD</div>
+<div class="i">2022-06-17 15:37:48 退出程序！</div>
+<div class="i">2022-06-17 15:38:31 登录SQLServer成功！</div>
+<div class="i">2022-06-17 15:38:33 [加载设备点位成功]      "COVI.VI"</div>
+<div class="i">2022-06-17 15:38:33 [加载设备点位成功]      "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:38:33 [加载设备点位成功]      "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:38:33 [加载设备点位成功]      "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 15:38:33 加载配置文件成功！</div>
+<div class="i">2022-06-17 15:38:33 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 15:38:33 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:38:33 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 15:38:33 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 15:39:03 [历史库上传任务成功]     HIST_AERO</div>
+<div class="i">2022-06-17 15:39:03 [历史库上传任务成功]     HIST_CSLS</div>
+<div class="i">2022-06-17 15:39:04 [历史库上传任务成功]     HIST_CMS</div>
+<div class="i">2022-06-17 15:39:04 [历史库上传任务成功]     HIST_VI</div>
+<div class="i">2022-06-17 15:39:04 [历史库上传任务成功]     HIST_ET</div>
+<div class="i">2022-06-17 15:39:05 [历史库上传任务成功]     HIST_LS</div>
+<div class="i">2022-06-17 15:39:05 [历史库上传任务成功]     HIST_VD</div>
+<div class="i">2022-06-17 15:39:08 保存历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 15:39:08 退出程序！</div>
+<div class="i">2022-06-17 16:54:08 登录SQLServer成功！</div>
+<div class="i">2022-06-17 16:54:10 [加载设备点位成功]      "COVI.VI"</div>
+<div class="i">2022-06-17 16:54:10 [加载设备点位成功]      "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:54:10 [加载设备点位成功]      "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:54:10 [加载设备点位成功]      "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:54:10 加载配置文件成功！</div>
+<div class="i">2022-06-17 16:54:10 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 16:54:10 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:54:10 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:54:10 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:54:30 保存历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:54:30 退出程序！</div>
+<div class="i">2022-06-17 16:54:30 加载历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:54:52 登录SQLServer成功！</div>
+<div class="i">2022-06-17 16:54:55 保存历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:54:55 退出程序！</div>
+<div class="i">2022-06-17 16:55:46 登录SQLServer成功！</div>
+<div class="i">2022-06-17 16:55:49 [加载设备点位成功]      "COVI.VI"</div>
+<div class="i">2022-06-17 16:55:49 [加载设备点位成功]      "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:55:49 [加载设备点位成功]      "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:55:49 [加载设备点位成功]      "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:55:49 加载配置文件成功！</div>
+<div class="i">2022-06-17 16:55:49 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 16:55:49 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:55:49 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:55:49 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:56:19 加载历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:56:19 [历史库上传任务成功]     HIST_AERO</div>
+<div class="i">2022-06-17 16:56:19 [历史库上传任务成功]     HIST_CSLS</div>
+<div class="i">2022-06-17 16:56:19 [历史库上传任务成功]     HIST_CMS</div>
+<div class="i">2022-06-17 16:56:19 [历史库上传任务成功]     HIST_VI</div>
+<div class="i">2022-06-17 16:56:20 [历史库上传任务成功]     HIST_ET</div>
+<div class="i">2022-06-17 16:56:20 [历史库上传任务成功]     HIST_LS</div>
+<div class="i">2022-06-17 16:56:20 [历史库上传任务成功]     HIST_VD</div>
+<div class="i">2022-06-17 16:56:32 保存历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:56:32 退出程序！</div>
+<div class="i">2022-06-17 16:56:37 登录SQLServer成功！</div>
+<div class="i">2022-06-17 16:56:40 [加载设备点位成功]      "COVI.VI"</div>
+<div class="i">2022-06-17 16:56:40 [加载设备点位成功]      "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:56:40 [加载设备点位成功]      "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:56:40 [加载设备点位成功]      "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:56:40 加载配置文件成功！</div>
+<div class="i">2022-06-17 16:56:40 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 16:56:40 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:56:40 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:56:40 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:57:10 加载历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:57:10 [历史库上传任务成功]     HIST_AERO</div>
+<div class="i">2022-06-17 16:57:10 [历史库上传任务成功]     HIST_CSLS</div>
+<div class="i">2022-06-17 16:57:10 [历史库上传任务成功]     HIST_CMS</div>
+<div class="i">2022-06-17 16:57:10 [历史库上传任务成功]     HIST_VI</div>
+<div class="i">2022-06-17 16:57:11 [历史库上传任务成功]     HIST_ET</div>
+<div class="i">2022-06-17 16:57:11 [历史库上传任务成功]     HIST_LS</div>
+<div class="i">2022-06-17 16:57:11 [历史库上传任务成功]     HIST_VD</div>
+<div class="i">2022-06-17 16:57:40 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 16:57:40 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:57:40 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:57:40 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:58:10 [历史库上传任务成功]     HIST_AERO</div>
+<div class="i">2022-06-17 16:58:10 [历史库上传任务成功]     HIST_CSLS</div>
+<div class="i">2022-06-17 16:58:10 [历史库上传任务成功]     HIST_CMS</div>
+<div class="i">2022-06-17 16:58:10 [历史库上传任务成功]     HIST_VI</div>
+<div class="i">2022-06-17 16:58:10 [历史库上传任务成功]     HIST_ET</div>
+<div class="i">2022-06-17 16:58:10 [历史库上传任务成功]     HIST_LS</div>
+<div class="i">2022-06-17 16:58:40 [实时库上传任务成功]     "COVI.VI"</div>
+<div class="i">2022-06-17 16:58:40 [实时库上传任务成功]     "MCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:58:40 [实时库上传任务成功]     "FCMS.ZCT1"</div>
+<div class="i">2022-06-17 16:58:40 [实时库上传任务成功]     "FCMS.ZCT2"</div>
+<div class="i">2022-06-17 16:59:10 [历史库上传任务成功]     HIST_AERO</div>
+<div class="i">2022-06-17 16:59:10 [历史库上传任务成功]     HIST_CSLS</div>
+<div class="i">2022-06-17 16:59:10 [历史库上传任务成功]     HIST_CMS</div>
+<div class="i">2022-06-17 16:59:10 [历史库上传任务成功]     HIST_VI</div>
+<div class="i">2022-06-17 16:59:10 [历史库上传任务成功]     HIST_ET</div>
+<div class="i">2022-06-17 16:59:10 [历史库上传任务成功]     HIST_LS</div>
+<div class="i">2022-06-17 16:59:23 保存历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 16:59:23 退出程序！</div>
+<div class="i">2022-06-17 17:30:41 登录SQLServer成功！</div>
+<div class="i">2022-06-17 17:30:44 保存历史数据缓存文件成功！</div>
+<div class="i">2022-06-17 17:30:44 退出程序！</div>
